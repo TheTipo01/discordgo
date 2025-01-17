@@ -2160,12 +2160,23 @@ type APIErrorMessage struct {
 
 // MessageReaction stores the data for a message reaction.
 type MessageReaction struct {
-	UserID    string `json:"user_id"`
-	MessageID string `json:"message_id"`
-	Emoji     Emoji  `json:"emoji"`
-	ChannelID string `json:"channel_id"`
-	GuildID   string `json:"guild_id,omitempty"`
+	UserID    string       `json:"user_id"`
+	MessageID string       `json:"message_id"`
+	Emoji     Emoji        `json:"emoji"`
+	ChannelID string       `json:"channel_id"`
+	GuildID   string       `json:"guild_id,omitempty"`
+	Burst     bool         `json:"burst"`
+	Type      ReactionType `json:"type"`
 }
+
+// Type of reaction
+// https://discord.com/developers/docs/resources/message#get-reactions-reaction-types
+type ReactionType int
+
+const (
+	ReactionTypeNormal ReactionType = 0
+	ReactionTypeBurst  ReactionType = 1
+)
 
 // GatewayBotResponse stores the data for the gateway/bot response
 type GatewayBotResponse struct {
