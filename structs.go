@@ -1563,6 +1563,9 @@ type Member struct {
 	// The hash of the avatar for the guild member, if any.
 	Avatar string `json:"avatar"`
 
+	// The hash of the banner for the guild member, if any.
+	Banner string `json:"banner"`
+
 	// The underlying user on which the member is based.
 	User *User `json:"user"`
 
@@ -1607,13 +1610,29 @@ func (m *Member) AvatarURL(size string) string {
 
 }
 
+// BannerURL returns the URL of the member's banner image.
+//
+//	size:    The size of the desired banner image as a power of two
+//	         Image size can be any power of two between 16 and 4096.
+func (m *Member) BannerURL(size string) string {
+	if m.Banner == "" {
+		return m.User.BannerURL(size)
+	}
+	return bannerURL(
+		m.Banner,
+		EndpointGuildMemberBanner(m.GuildID, m.User.ID, m.Banner),
+		EndpointGuildMemberBannerAnimated(m.GuildID, m.User.ID, m.Banner),
+		size,
+	)
+}
+
 // DisplayName returns the member's guild nickname if they have one,
 // otherwise it returns their discord display name.
 func (m *Member) DisplayName() string {
 	if m.Nick != "" {
 		return m.Nick
 	}
-	return m.User.GlobalName
+	return m.User.DisplayName()
 }
 
 // ClientStatus stores the online, offline, idle, or dnd status of each device of a Guild member.
@@ -2464,6 +2483,9 @@ type Subscription struct {
 
 	// List of entitlements granted for this subscription
 	EntitlementIDs []string `json:"entitlement_ids"`
+
+	// List of SKUs that this user will be subscribed to at renewal
+	RenewalSKUIDs []string `json:"renewal_sku_ids,omitempty"`
 
 	// Start of the current subscription period
 	CurrentPeriodStart time.Time `json:"current_period_start"`
