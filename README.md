@@ -1,11 +1,5 @@
-# DiscordGo ozraru fork
+# DiscordGo
 
-This is fork of [bwmarrin/discordgo](https://github.com/bwmarrin/discordgo).
+This is fork of [bwmarrin/discordgo](https://github.com/bwmarrin/discordgo), with the voice rework from [ozraru](https://github.com/ozraru/discordgo)
 
-If you want to use my patches before they are merged, you can use this repository.
-Otherwise, I recommend to use upstream.
-
-go.mod example
-```
-replace github.com/bwmarrin/discordgo => github.com/ozraru/discordgo v0.26.2-0.20250118163132-f992cd170161
-```
+I want to see if they fix my issue with voice connections.
