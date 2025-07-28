@@ -1,8 +1,13 @@
-module github.com/bwmarrin/discordgo
+module github.com/TheTipo01/discordgo
 
-go 1.13
+go 1.23.0
+
+toolchain go1.24.5
 
 require (
+	github.com/bwmarrin/discordgo v0.29.0
 	github.com/gorilla/websocket v1.5.3
-	golang.org/x/crypto v0.32.0
+	golang.org/x/crypto v0.40.0
 )
+
+require golang.org/x/sys v0.34.0 // indirect
